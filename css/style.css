@@ -1,0 +1,299 @@
+/* ============================================================
+   RamuMomo Works ─ 見た目の設定（style.css）
+
+   ★ 色を変えたいとき：
+      下の「ライト用の色」と「ダーク用の色」の、# から始まる色コードだけを
+      書き換えます。サイト全体の色が、まとめて変わります。
+   ★ ダーク用の色は、2か所（@media と html[data-theme="dark"]）に
+      同じ内容を書いてあります。変えるときは、2か所とも変えてください。
+   ============================================================ */
+
+/* ---------- ライト用の色 ---------- */
+:root {
+  --bg: #faf8f6;          /* 背景 */
+  --surface: #ffffff;     /* カードの背景 */
+  --surface-2: #f3efeb;   /* 薄いグレーの面 */
+  --text: #2a2a2e;        /* 文字 */
+  --muted: #6b6b73;       /* 補足の文字 */
+  --border: #e6e0da;      /* 線 */
+  --accent: #b84a66;      /* アクセント色（ボタン・強調） */
+  --accent-soft: #fbe9ee; /* アクセントの薄い色 */
+  --on-accent: #ffffff;   /* アクセントの上の文字 */
+  --link: #a23c58;        /* リンクの色 */
+  --ok: #2f7d57;          /* 「公開中」の色 */
+  --warn: #8f6200;        /* 「制作中」の色 */
+
+  --radius: 14px;
+  --maxw: 960px;
+  --font: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", "Yu Gothic",
+          "Meiryo", "Noto Sans JP", "Noto Sans CJK JP", system-ui, -apple-system,
+          "Segoe UI", Roboto, sans-serif;
+}
+
+/* ---------- ダーク用の色（パソコン・スマホの設定が「ダーク」のとき） ---------- */
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    --bg: #151518;
+    --surface: #1e1e22;
+    --surface-2: #26262b;
+    --text: #ececef;
+    --muted: #a6a6b0;
+    --border: #34343b;
+    --accent: #f08fa6;
+    --accent-soft: #3a2830;
+    --on-accent: #1a1a1d;
+    --link: #f4a3b6;
+    --ok: #7fcf9f;
+    --warn: #e6bf6a;
+  }
+}
+
+/* ---------- ダーク用の色（ボタンで「ダーク」を選んだとき） ---------- */
+html[data-theme="dark"] {
+  --bg: #151518;
+  --surface: #1e1e22;
+  --surface-2: #26262b;
+  --text: #ececef;
+  --muted: #a6a6b0;
+  --border: #34343b;
+  --accent: #f08fa6;
+  --accent-soft: #3a2830;
+  --on-accent: #1a1a1d;
+  --link: #f4a3b6;
+  --ok: #7fcf9f;
+  --warn: #e6bf6a;
+}
+
+/* ============================================================
+   ここから下は、ふだんは編集しません
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image: radial-gradient(circle at 100% 0, var(--accent-soft) 0, transparent 460px);
+  background-repeat: no-repeat;
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.85;
+  overflow-wrap: anywhere;
+  word-break: auto-phrase;      /* 対応しているブラウザでは、文節で改行されます */
+}
+
+img { max-width: 100%; height: auto; }
+a { color: var(--link); text-underline-offset: 0.2em; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+h1, h2, h3 { line-height: 1.4; margin: 0; text-wrap: balance; }
+.hero-tagline, .page-sub { text-wrap: balance; }
+p { margin: 0 0 1em; }
+ul { margin: 0; }
+
+.container { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+
+/* ----- スキップリンク（キーボード操作の人向け） ----- */
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 100;
+  background: var(--surface); color: var(--text);
+  padding: 0.6rem 1rem; border: 2px solid var(--accent); border-radius: 8px;
+}
+.skip:focus { left: 12px; top: 12px; }
+
+/* ----- ヘッダー ----- */
+.site-header { border-bottom: 1px solid var(--border); }
+.header-top {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 10px; padding-top: 14px; padding-bottom: 8px;
+}
+.brand {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--text); text-decoration: none; font-weight: 700;
+  font-size: 1.15rem; letter-spacing: 0.02em;
+}
+.brand img { width: 30px; height: 30px; border-radius: 8px; display: block; }
+.controls { display: flex; align-items: center; gap: 8px; }
+.pill {
+  font: inherit; font-size: 0.875rem; color: var(--text);
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 999px; padding: 0.3rem 0.9rem; min-height: 36px; cursor: pointer;
+}
+.pill:hover { border-color: var(--accent); }
+
+.nav {
+  display: flex; gap: 2px; margin: 0; padding: 0; list-style: none;
+  overflow-x: auto; scrollbar-width: none;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav a {
+  display: block; padding: 0.6rem 0.9rem; white-space: nowrap;
+  color: var(--muted); text-decoration: none; font-weight: 700;
+  font-size: 0.85rem; letter-spacing: 0.1em; border-bottom: 3px solid transparent;
+}
+.nav a:hover { color: var(--text); }
+.nav a[aria-current="page"] { color: var(--text); border-bottom-color: var(--accent); }
+
+/* ----- メイン ----- */
+main { display: block; padding-bottom: 8px; outline: none; }
+.section { padding: 30px 0 6px; }
+.section-head { margin-bottom: 16px; }
+.eyebrow {
+  margin: 0 0 4px; color: var(--accent); font-weight: 700;
+  font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+}
+.section-head h2 { font-size: 1.4rem; }
+
+/* ----- ヒーロー（HOME の最初の部分） ----- */
+.hero {
+  padding: 56px 0 30px;
+}
+.hero h1 { font-size: clamp(2.1rem, 7vw, 3.4rem); letter-spacing: 0.01em; margin: 0.1em 0 0.25em; }
+.hero-tagline { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6em; }
+.hero-lead { color: var(--muted); max-width: 40em; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+
+/* ----- ページの見出し（TOOLS など） ----- */
+.page-head { padding: 40px 0 20px; }
+.page-head h1 { font-size: clamp(1.8rem, 5vw, 2.4rem); letter-spacing: 0.08em; }
+.page-sub { color: var(--muted); margin: 0.3em 0 0; }
+
+/* ----- ボタン ----- */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.45rem;
+  font: inherit; font-size: 0.92rem; font-weight: 700; line-height: 1.4;
+  padding: 0.55rem 1.15rem; border-radius: 999px; cursor: pointer;
+  border: 1.5px solid var(--accent); color: var(--link); background: transparent;
+  text-decoration: none;
+}
+.btn:hover { background: var(--accent-soft); }
+.btn-primary { background: var(--accent); color: var(--on-accent); }
+.btn-primary:hover { background: var(--accent); filter: brightness(1.08); }
+a.btn[target="_blank"]::after { content: "\2197"; font-size: 0.85em; }
+.btn.is-disabled {
+  border-style: dashed; border-color: var(--border); color: var(--muted);
+  cursor: default; background: transparent;
+}
+.btn small { font-weight: 400; font-size: 0.78rem; }
+
+/* ----- カード（HOME の「最新の制作物」など） ----- */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; }
+.card {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column;
+}
+.card .body { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card h3 { font-size: 1.1rem; }
+.card-text { color: var(--muted); font-size: 0.92rem; margin: 0; flex: 1; }
+.card-meta { display: flex; align-items: center; gap: 8px; }
+.kind { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; color: var(--muted); }
+.more { font-weight: 700; font-size: 0.9rem; }
+.card.plain { padding: 18px 20px; }
+.card.plain h3 { margin-bottom: 6px; font-size: 1.05rem; }
+.card.plain p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+
+/* ----- サムネイル（画像がないときは、頭文字を表示） ----- */
+.thumb {
+  position: relative; aspect-ratio: 16 / 10; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--accent-soft), var(--surface-2));
+}
+.thumb img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.thumb-initial { font-size: 3rem; font-weight: 800; color: var(--accent); opacity: 0.85; }
+
+/* ----- バッジ・タグ ----- */
+.badge {
+  display: inline-block; font-size: 0.74rem; font-weight: 700; line-height: 1.7;
+  padding: 0 0.65rem; border-radius: 999px; border: 1px solid currentColor;
+}
+.badge-released { color: var(--ok); }
+.badge-coming { color: var(--link); }
+.badge-wip { color: var(--warn); }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.tags li {
+  font-size: 0.78rem; line-height: 1.7; color: var(--muted);
+  background: var(--surface-2); padding: 0 0.65rem; border-radius: 6px;
+}
+
+/* ----- 制作物の詳細（TOOLS・ASSETS） ----- */
+.product {
+  display: grid; grid-template-columns: 240px 1fr; gap: 24px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 20px; margin-bottom: 20px;
+  scroll-margin-top: 16px;
+}
+.product .thumb { border-radius: 10px; align-self: start; }
+.product-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 4px; }
+.product-head h2 { font-size: 1.5rem; }
+.version { color: var(--muted); font-size: 0.9rem; }
+.product .tagline { font-weight: 700; margin-bottom: 0.5em; }
+.features { padding-left: 1.3em; margin: 0 0 1em; }
+.features li { margin-bottom: 0.2em; }
+.meta { display: grid; grid-template-columns: auto 1fr; gap: 6px 16px; margin: 0 0 1em; font-size: 0.92rem; }
+.meta dt { color: var(--muted); }
+.meta dd { margin: 0; }
+.notice {
+  font-size: 0.88rem; color: var(--muted); background: var(--surface-2);
+  border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
+  padding: 0.5rem 0.9rem; margin-bottom: 1em;
+}
+.product .actions { margin-top: 6px; }
+
+/* ----- お知らせ・使い方（NOTES） ----- */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 8px; }
+.chip {
+  font: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer;
+  color: var(--text); background: var(--surface); border: 1px solid var(--border);
+  border-radius: 999px; padding: 0.25rem 0.95rem;
+}
+.chip[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.note { border-top: 1px solid var(--border); padding: 22px 0; scroll-margin-top: 16px; }
+.note h2 { font-size: 1.25rem; margin: 4px 0 10px; }
+.note-meta { display: flex; align-items: center; gap: 10px; color: var(--muted); font-size: 0.88rem; }
+.note p:last-child { margin-bottom: 0; }
+
+.news-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+.news-list li {
+  display: grid; grid-template-columns: 9.5em 1fr; gap: 12px;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.news-list time { color: var(--muted); font-size: 0.9rem; }
+.news-link { margin-top: 14px; }
+
+/* ----- ABOUT ----- */
+.prose { max-width: 42em; }
+.prose ul { padding-left: 1.3em; }
+.prose .link-list { padding-left: 0; }
+.link-list { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; padding: 0; list-style: none; }
+
+/* ----- 空のとき・エラー ----- */
+.empty {
+  padding: 28px 20px; text-align: center; color: var(--muted);
+  border: 1px dashed var(--border); border-radius: var(--radius);
+}
+.fatal { max-width: 40em; margin: 60px auto; padding: 0 20px; }
+
+/* ----- フッター ----- */
+.site-footer {
+  margin-top: 56px; padding: 26px 0 44px; border-top: 1px solid var(--border);
+  color: var(--muted); font-size: 0.88rem;
+}
+.footer-inner { display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between; align-items: center; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 0; padding: 0; list-style: none; }
+
+/* ----- スマートフォン向け ----- */
+@media (max-width: 640px) {
+  body { font-size: 15.5px; }
+  .nav { justify-content: space-between; }
+  .nav a { padding: 0.6rem 0.5rem; font-size: 0.8rem; letter-spacing: 0.05em; }
+  .hero { padding-top: 40px; }
+  .product { grid-template-columns: 1fr; gap: 16px; padding: 16px; }
+  .news-list li { grid-template-columns: 1fr; gap: 0; }
+}
+
+/* ----- 動きを減らす設定の人向け ----- */
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}
